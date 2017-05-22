@@ -106,16 +106,16 @@ if( !(test-path "C:\localStaging") )
 
 #Setup the UploadFilter (.dll and .config)
 $sitecoreRoot = $site.physicalPath              			
-$downLoadURI = "https://upload.infocentricresearch.com/access/2017-05-19_15-13--2y11ve9qoEwngfrPMn6alN6PtvUtGEQ7j0PVsARxI5xJVkXjavj7hQIC/UploadFilter.config.zip"
+$downLoadURI = "https://raw.githubusercontent.com/skaty92/SitecoreHardening/master/UploadFilter.config"
 $downLoadZipPath1 = "C:\localStaging\UploadFilter.config"
-Invoke-WebRequest -Uri $downLoadURI -OutFile $downLoadZipPath
+Invoke-WebRequest -Uri $downLoadURI -OutFile $downLoadZipPath1
 
-$downLoadURI = "https://upload.infocentricresearch.com/access/2017-05-19_15-13--2y11y8AwmNfJymXT4gZoo8btyuBMBN5unbsZCKgzcSRIvvYK874Fz0a/Sitecore.UploadFilter.dll.zip"
+$downLoadURI = "https://github.com/skaty92/SitecoreHardening/raw/master/Sitecore.UploadFilter.dll"
 $downLoadZipPath2 = "C:\localStaging\Sitecore.UploadFilter.dll"
-Invoke-WebRequest -Uri $downLoadURI -OutFile $downLoadZipPath
+Invoke-WebRequest -Uri $downLoadURI -OutFile $downLoadZipPath2
 
-$WebsiteBin = "{0}\Website\bin" -f $sitecoreRoot 
-$WebsiteConfig = "{0}\Website\app_config\include" -f $sitecoreRoot 
+$WebsiteBin = "{0}\bin" -f $sitecoreRoot 
+$WebsiteConfig = "{0}\app_config\include" -f $sitecoreRoot 
 Copy-Item -Path $downLoadZipPath1 -Destination $WebsiteConfig
 Copy-Item -Path $downLoadZipPath2 -Destination $WebsiteBin
 
@@ -152,8 +152,8 @@ Write-Output "Step 4 completed"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # this .config is what we're applying: https://gist.github.com/grant-killian/b64aa6cabd18e9b0097257ee4a2dc614
-$downLoadURI = "https://gist.githubusercontent.com/grant-killian/b64aa6cabd18e9b0097257ee4a2dc614/raw"
-$downLoadPath = "C:\localStaging\Rackspace.SecurityHardening.Step5.IncreaseLoginSecurity.config"
+$downLoadURI = "https://raw.githubusercontent.com/skaty92/SitecoreHardening/master/Sitecore.Hardening.LoginSecurity.config"
+$downLoadPath = "C:\localStaging\Sitecore.Hardening.LoginSecurity.config"
 Invoke-WebRequest -Uri $downLoadURI -OutFile $downLoadPath
 Copy-Item -Path $downLoadPath -Destination $infocentricInclude #we use a "Z.Infocentric" directory under /app_config/include
 
@@ -199,8 +199,8 @@ Write-Output "Step 6 completed"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # this .config is what we're applying: https://gist.github.com/grant-killian/136b165ed632acf799ba95f9b91578bb
-$downLoadURI = "https://gist.githubusercontent.com/grant-killian/136b165ed632acf799ba95f9b91578bb/raw"
-$downLoadPath = "C:\localStaging\Rackspace.SecurityHardening.Step8.ProtectMediaRequests.config"
+$downLoadURI = "https://raw.githubusercontent.com/skaty92/SitecoreHardening/master/Sitecore.Hardening.ProtectMediaRequests.config"
+$downLoadPath = "C:\localStaging\Sitecore.Hardening.ProtectMediaRequests.config"
 Invoke-WebRequest -Uri $downLoadURI -OutFile $downLoadPath
 
 #set the implementation guid -- the gist just has a placeholder
